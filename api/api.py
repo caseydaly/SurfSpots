@@ -1,11 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import mysql.connector
 import yaml
 import numpy as np
 import json
+import os
 
-with open('db_info.yaml') as file:
+with open('/var/www/SurfSpots/api/db_info.yaml') as file:
     db_info = yaml.load(file, Loader=yaml.FullLoader)
     mydb = mysql.connector.connect(
         host=db_info['host'],
@@ -14,8 +15,18 @@ with open('db_info.yaml') as file:
         database=db_info['database']
     )
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../client_app/build')
 CORS(app)
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
 
 @app.route('/api/spots', methods=['GET'])
 def get_spots():
