@@ -20,13 +20,15 @@ CORS(app)
 @app.route('/api/spots', methods=['GET'])
 def get_spots():
     cursor = mydb.cursor()
-    cursor.execute("select Location, Latitude, Longitude from Spots;")
+    cursor.execute("select Name, Latitude, Longitude, Area, Country from Spots;")
     spots = []
-    for (Location, Latitude, Longitude) in cursor:
+    for (Location, Latitude, Longitude, Area, Country) in cursor:
         spot = {
             "name": str(Location),
             "lat": float(Latitude),
-            "lon": float(Longitude)
+            "lon": float(Longitude),
+            "area": str(Area),
+            "country": str(Country)
         }
         spots.append(spot)
     return jsonify(spots)
@@ -53,11 +55,10 @@ def get_closest_spot():
     d = {}
     l = []
     for spot in spots:
-        d[(spot["lat"], spot["lon"])] = spot["name"]
+        d[(spot["lat"], spot["lon"])] = spot
         l.append((spot["lat"], spot["lon"]))
-    print(l)
-    closest = closest_node(loc, l)
-    return d[l[closest]]
+    index_of_closest = closest_node(loc, l)
+    return d[l[index_of_closest]]
     
 
 
