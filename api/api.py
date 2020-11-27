@@ -6,7 +6,13 @@ import numpy as np
 import json
 import os
 
-with open('/var/www/SurfSpots/api/db_info.yaml') as file:
+dir_path = os.path.dirname(os.path.realpath(__file__))
+if '/Users/caseydaly' in dir_path:
+    db_info_path = 'db_info.yaml'
+else:
+    db_info_path = '/var/www/SurfSpots/api/db_info.yaml'
+
+with open(db_info_path) as file:
     db_info = yaml.load(file, Loader=yaml.FullLoader)
     mydb = mysql.connector.connect(
         host=db_info['host'],

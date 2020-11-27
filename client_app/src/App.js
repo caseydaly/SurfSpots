@@ -5,18 +5,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>
+          SurfSpots API
+        </h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Query for various surf locations and beaches around the globe.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <h2>
+            Spots enpoint
+          </h2>
+
+          <h2>
+            Closest spot endpoint
+          </h2>
+        </div>
       </header>
     </div>
   );
