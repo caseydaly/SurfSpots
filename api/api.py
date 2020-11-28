@@ -61,12 +61,12 @@ def get_closest_spot():
     lat_str = request.args.get("lat")
     lon_str = request.args.get("lon")
     if not lat_str or not lon_str:
-        return "Bad request", 400
+        return "Must include 'lat' and 'lon' url args in request", 400
     try:
         lat = float(lat_str)
         lon = float(lon_str)
     except ValueError:
-        return "Bad request", 400
+        return "'lat' and 'lon' fields must be of type float", 400
     loc = (lat, lon)
     spots = json.loads(get_spots().data)
     d = {}
@@ -76,6 +76,28 @@ def get_closest_spot():
         l.append((spot["lat"], spot["lon"]))
     index_of_closest = closest_node(loc, l)
     return d[l[index_of_closest]]
+
+@app.route('/api/coords', methods=['GET'])
+def get_coords_from_spot():
+    location = request.args.get("location").strip()
+    if not location:
+        return "Must specify 'location' url variable", 400
+    if not (type(location) is str):
+        return "'location' field must be of type string", 400
+    cursor = mydb.cursor()
+    location = "Salmon Creek"
+    cursor.execute("""
+        SELECT 
+            Latitude, Longitude
+        FROM
+            Spots
+        WHERE
+            Name=%s;
+        """, (location,))
+    result = cursor.fetchone()
+    lat, lon = result
+    mydb.commit()
+    return jsonify((lat, lon)), 200
     
 
 
