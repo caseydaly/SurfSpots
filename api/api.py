@@ -85,7 +85,6 @@ def get_coords_from_spot():
     if not (type(location) is str):
         return "'location' field must be of type string", 400
     cursor = mydb.cursor()
-    location = "Salmon Creek"
     cursor.execute("""
         SELECT 
             Latitude, Longitude
