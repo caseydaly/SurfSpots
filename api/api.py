@@ -5,6 +5,7 @@ import yaml
 import numpy as np
 import json
 import os
+import OpenSSL
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 if '/Users/caseydaly' in dir_path:
@@ -103,4 +104,4 @@ def get_coords_from_spot():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, ssl_context='adhoc')
