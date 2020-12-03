@@ -94,10 +94,15 @@ def get_coords_from_spot():
         WHERE
             Name=%s;
         """, (location,))
-    result = cursor.fetchone()
-    lat, lon = result
-    mydb.commit()
-    return jsonify((lat, lon)), 200
+    result = cursor.fetchall()
+    if cursor.rowcount > 0:
+        #return the first
+        for coord in result:
+            lat, lon = coord
+            mydb.commit()
+            return jsonify((lat, lon)), 200
+    else:
+        return jsonify((None, None)), 200
     
 
 

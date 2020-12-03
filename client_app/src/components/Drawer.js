@@ -129,8 +129,8 @@ export default function Drawer() {
                         Many of the API endpoints provide information about a single spot or list of spots. Spots are json objects with the following fields: <br />
                         <br />
                         <span style={{ fontWeight: "bolder" }}>name</span>: A string representing the recognized name of the surf spot <br />
-                        <span style={{ fontWeight: "bolder" }}>latitude</span>: A floating point number representing the latitude portion of a spot’s location <br />
-                        <span style={{ fontWeight: "bolder" }}>longitude</span>: A floating point number representing the longitude portion of a spot’s location< br />
+                        <span style={{ fontWeight: "bolder" }}>lat</span>: A floating point number representing the latitude portion of a spot’s location <br />
+                        <span style={{ fontWeight: "bolder" }}>lon</span>: A floating point number representing the longitude portion of a spot’s location< br />
                         <span style={{ fontWeight: "bolder" }}>area</span>: A string representing the area that the surf spot is located in. This could be a city, county, or other recognized municipality to describe the surrounding area of a surf spot. <br />
                         <span style={{ fontWeight: "bolder" }}>country</span>: A string representing the country a surf spot is located in. <br />
                         <br />
