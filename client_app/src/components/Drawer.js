@@ -139,8 +139,8 @@ export default function Drawer() {
                         <div style={{ marginLeft: 100, marginTop: 50 }}>
                             {'{'} <br />
                                 &nbsp;&nbsp;    name: “Blacks”, <br />
-	                            &nbsp;&nbsp;    latitude: 32.87723159790039, <br />
-	                            &nbsp;&nbsp;    longitude: -117.25302886962890, <br />
+	                            &nbsp;&nbsp;    lat: 32.87723159790039, <br />
+	                            &nbsp;&nbsp;    lon: -117.25302886962890, <br />
 	                            &nbsp;&nbsp;    area: “San Diego, CA”, <br />
 	                            &nbsp;&nbsp;    country: “USA” <br />
                             {'}'}
