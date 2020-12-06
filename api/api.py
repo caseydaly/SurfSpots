@@ -1,29 +1,15 @@
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import mysql.connector
-import yaml
 import numpy as np
 import json
 import os
 import OpenSSL
+from DBConnection import DBConnection
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-if '/Users/caseydaly' in dir_path:
-    db_info_path = 'db_info.yaml'
-else:
-    db_info_path = '/var/www/SurfSpots/api/db_info.yaml'
-
-with open(db_info_path) as file:
-    db_info = yaml.load(file, Loader=yaml.FullLoader)
-    mydb = mysql.connector.connect(
-        host=db_info['host'],
-        user=db_info['user'],
-        password=db_info['password'],
-        database=db_info['database']
-    )
-
-app = Flask(__name__, static_folder='../client_app/build')
-CORS(app)
+with DBConnection() as mydb:
+    app = Flask(__name__, static_folder='../client_app/build')
+    CORS(app)
 
 # Serve React App
 @app.route('/', defaults={'path': ''})
